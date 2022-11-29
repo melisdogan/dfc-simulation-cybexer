@@ -1,0 +1,26 @@
+{
+    "Connections": [
+        {
+            "Name": "localhost",
+            "Host": "localhost",
+            "AmqpPort": 5672,
+            "WebPort": 15672,
+            "VirtualHost": "/",
+            "Username": "guest",
+            "Password": "guest",
+            "ReconnectInterval": 5,
+            "RequestedHeartBeat": 30
+        },
+        {
+            "Name": "staging",
+            "Host": "staging.estcube.eu",
+            "AmqpPort": 8008,
+            "WebPort": 8257,
+            "VirtualHost": "/",
+            "Username": "guest",
+            "Password": "guest",
+            "ReconnectInterval": 5,
+            "RequestedHeartBeat": 30
+        }
+    ]
+}
