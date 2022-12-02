@@ -25,9 +25,9 @@ public class CommsZone : MonoBehaviour
         isWithinComms = false;
         commzone = GameObject.FindGameObjectWithTag("CommZone");
         satellite = GameObject.FindGameObjectWithTag("Celestial");
-        _t1 = new Thread(() => _func1("physicum"));
+        _t1 = new Thread(() => _func1("packetloss_groundstation_uplink"));
         _t1.Start();
-        _t2 = new Thread(() => _func1("toravere"));
+        _t2 = new Thread(() => _func1("dfc_packetloss_downlink"));
         _t2.Start();
         var factory = new ConnectionFactory() { HostName = "staging.estcube.eu", Port = 8008, UserName = "guest", Password = "guest" };
         var connection = factory.CreateConnection();
@@ -71,17 +71,17 @@ public class CommsZone : MonoBehaviour
                     var properties = channelPub.CreateBasicProperties();
                     try
                     {
-                        if (msgQueue == "physicum")
+                        if (msgQueue == "dfc_packetloss_downlink")
                         {
-                            channelPub.BasicPublish(exchange: "ground_stations",
-                                     routingKey: "uplink.toravere",
+                            channelPub.BasicPublish(exchange: "Packet Loss",
+                                     routingKey: "packetloss_downlink",
                                      basicProperties: properties,
                                      body: Encoding.UTF8.GetBytes(msg));
                         }
                         else
                         {
-                            channelPub.BasicPublish(exchange: "ground_stations",
-                                     routingKey: "uplink.physicum",
+                            channelPub.BasicPublish(exchange: "DFC",
+                                     routingKey: "dfc_uplink",
                                      basicProperties: properties,
                                      body: Encoding.UTF8.GetBytes(msg));
                         }
